@@ -1,5 +1,7 @@
 ﻿# Amazon_Review_Sentiment_Analysis
+Used wsl2 to run tensorflow.
 
+https://dsaint31.tistory.com/328
 # Data Overview
 Total number of reviews : 13638545
 # Data Processing
