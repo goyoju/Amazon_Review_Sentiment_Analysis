@@ -1,5 +1,6 @@
 ﻿# Amazon_Review_Sentiment_Analysis
 Used wsl2 to run tensorflow.
+https://hsleeword.wordpress.com/category/tech/%EC%86%8C%EC%86%8C%ED%95%9C-tip/
 
 https://dsaint31.tistory.com/328
 # Data Overview
