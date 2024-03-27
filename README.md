@@ -15,7 +15,7 @@ This project aims to perform sentiment analysis on Amazon reviews ranging from M
     * Memory : 32 GB
 
 ### Dataset download
-First, update your local repository to get the latest version. Run this command in the terminal:
+First, update your local repository:
 
 {
 
@@ -24,7 +24,7 @@ First, update your local repository to get the latest version. Run this command 
 
 
 
-Next, download the dataset using DVC:
+Next, download the dataset with DVC:
 
 {
 
@@ -34,14 +34,12 @@ Next, download the dataset using DVC:
 
 
 ### Setting Up:
+Run the setup script to prepare your environment automatically:
 
 {
 
     $ python3 setting_up.py
 }
-
-
-Execute the command to set up your environment. This script will automatically process the data and create the model:
 
 ### Prediction model:
 To predict whether a given input text is negative or positive, run the prediction script:
@@ -51,7 +49,7 @@ To predict whether a given input text is negative or positive, run the predictio
     $ python3 prediction.py
 }
 
-After executing the script, you can input any text when prompted to predict its sentiment.
+Input any text when prompted to receive a sentiment prediction.
 
 Ex.
 
@@ -94,54 +92,54 @@ Example data:
 
 }
 
-Total number of reviews : 13638545
+Total number of reviews : 13,638,545
 
 # TFRecord_convert.py
-The raw data, formatted in JSON, is loaded and converted into a more memory-efficient format, TFRecord, for training purposes. The preprocessing steps include:
+Preprocessing steps include converting JSON files to dataframes, sampling, and transforming into TFRecord format for efficient training.
 
 ## Load and preprocessing
-* Converting JSON files to data frames with columns: reviewText, overall, and vote.
-* Applying custom preprocessing functions.
+* Convert JSON files to data frames with columns: reviewText, overall, and vote.
+* Apply custom preprocessing functions.
 * Sampling the data
-  * Sampling data due to physical memory limitations (sample size = 100,000 for each dataframe)
-  * Assigning weight values based on vote counts for reliability
-  * Dropping the vote column.
+  * Sample data due to physical memory limitations (sample size = 100,000 for each dataframe)
+  * Assign weight values based on vote counts for reliability
+  * Drop the vote column.
 
 ## Positivity
-* Creating a positivity column where ratings over 3 are labeled as 1 (positive), otherwise 0 (negative)
-* Dropping the overall column.
+* Create a positivity column where ratings over 3 are labeled as 1 (positive), otherwise 0 (negative)
+* Drop the overall column.
 
 ## TFRecord
 * The data is then transformed into TFRecord format, requiring serialization methods.
 
 # training_setting.py
-The preprocessed TFRecord data, consisting of reviewText and positivity, is loaded, converted into data frames, and prepared for training.
+The preprocessed data is loaded, processed for tokenization and padding, and prepared for model training.
 
 ## Processing Data
-* Loading data and converting it to a dataframe.
-* Setting X_df as reviewText and y_df as positivity, and splitting into train and test datasets.
-* Processing Tokenization and Padding for the reviewText data
-  * Using tensorflow.keras
-* Saving the tokenizer in JSON format for the prediction model.
+* Load and convert data into a dataframe.
+* Set X_df as reviewText and y_df as positivity, then split.
+* Process Tokenization and Padding for the reviewText data
+  * Use tensorflow.keras
+* Save the tokenizer in JSON format for the prediction model.
 * Returning X_train, X_test, y_train, y_test, and the tokenizer.
 
 
 # modeling.py
-Using TensorFlow, I built a model that can determine whether the text is negative or positive
+A TensorFlow model is constructed to classify texts based on sentiment.
 
 ## TensorFlow Model
-* Using the TensorBoard callback to monitor the training process.
-* Unlocking the GPU memory usage, especially beneficial for systems running WSL2.
-* Obtaining X_train, X_test, y_train, y_test, and the tokenizer via the process_data function from training.py.
-* Adjusting Hyperparameters:
- * Tuning the model with specific hyperparameters including Embedding Dimension, Neuron Units, Vocabulary Size, Batch Size, and Number of Epochs.
-* Constructing the Model:
- * Adding a Dense layer with a sigmoid activation function suitable for binary classification.
-* Implementing EarlyStopping and ModelCheckpoint callbacks for improved training and memory efficiency.
-* Loading and saving the model data in HDF5 format for efficient storage and access.
+* Use the TensorBoard callback to monitor the training process.
+* Adjust for WSL2 GPU memory usage.
+* Obtain X_train, X_test, y_train, y_test, and the tokenizer via the process_data function from training.py.
+* Adjust Hyperparameters:
+  * Tune the model with specific hyperparameters including Embedding Dimension, Neuron Units, Vocabulary Size, Batch Size, and Number of Epochs.
+* Construct the Model:
+  * Add a Dense layer with a sigmoid activation function suitable for binary classification.
+* Implement EarlyStopping and ModelCheckpoint callbacks for improved training and memory efficiency.
+* Load and save the model data in HDF5 format for efficient storage and access.
 * Prediction:
- * Assessing test accuracy to validate the model’s predictive capability.
+  * Assess test accuracy to validate the model’s predictive capability.
 
 # sentiment_predict.py
-* Applying preprocessing to the user-provided string using the tokenizer from training.py.
-* Utilizing the trained model to predict whether the input string conveys a negative or positive sentiment.
+* Apply preprocessing to the user-provided string using the tokenizer from training.py.
+* Utilize the trained model to predict whether the input string conveys a negative or positive sentiment.
