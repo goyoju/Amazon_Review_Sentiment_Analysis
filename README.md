@@ -66,19 +66,28 @@ Datasets for the prediction model : **Electronics_5.json**, **Home_and_Kitchen_5
 
 {
   **"sort_timestamp":** 1634275259292,
+  
   **"rating":** 3.0,
+  
   **"helpful_votes":** 0,
+  
    **"title":** "Meh",
+   
    **"text":** "These were lightweight and soft but much too small for my liking. I would have preferred two of these together to make one loc. For that reason I will not be repurchasing.",
+   
   **"images":** [{
        "small_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL256_.jpg",
        "medium_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL800_.jpg",
        "large_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL1600_.jpg",
        "attachment_type": "IMAGE"
   }],
+  
   **"asin":** "B088SZDGXG",
+  
   **"verified_purchase":** true,
+  
   **"parent_asin":** "B08BBQ29N5",
+  
   **"user_id":** "AEYORY2AVPMCPDV57CE337YU5LXA"
 }
 
