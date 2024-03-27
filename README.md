@@ -15,33 +15,43 @@ This project aims to perform sentiment analysis on Amazon reviews ranging from M
    * Memory : 32 GB
 
 ### Dataset download
-First, get the git first.download Run this on the terminal.
+First, update your local repository to get the latest version. Run this command in the terminal:
 
-'''
-$ git pull
+{
 
-'''
+    "$ git pull",
+}
 
-Then download the dataset from DVC.
 
-'''
-$ dvc pull
-'''
+
+Next, download the dataset using DVC:
+
+{
+
+    $ dvc pull
+}
+
+
 
 ### Setting Up:
-'''
-$ python3 setting_up.py
-'''
 
-It will autometically train the data and create model.
+{
+
+    $ python3 setting_up.py
+}
+
+
+Execute the command to set up your environment. This script will automatically process the data and create the model:
 
 ### Prediction model:
+To predict whether a given input text is negative or positive, run the prediction script:
 
-'''
-$ python3 prediction.py
-'''
+{
 
-Then you can type anything to predict whether negative or positive
+    $ python3 prediction.py
+}
+
+After executing the script, you can input any text when prompted to predict its sentiment.
 
 Ex.
 
