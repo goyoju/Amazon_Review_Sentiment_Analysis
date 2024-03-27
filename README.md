@@ -1,5 +1,4 @@
-﻿# Amazon_Review_Sentiment_Analysis
-
+﻿# Amazon Reviews Sentiment Analysis
 
 ## Abstract
 This project aims to perform sentiment analysis on Amazon reviews ranging from May 1996 to October 2018. By analyzing customer reviews in the Electronics and Home & Kitchen categories, the project predicts whether a review is positive or negative.
@@ -15,12 +14,16 @@ This project aims to perform sentiment analysis on Amazon reviews ranging from M
    * GPU : RTX 4060TI 6GB
    * Memory : 32 GB
 
-# Dataset download
+### Dataset download
 First, get the git first.download Run this on the terminal.
+
 '''
 $ git pull
+
 '''
+
 Then download the dataset from DVC.
+
 '''
 $ dvc pull
 '''
@@ -33,36 +36,61 @@ $ python3 setting_up.py
 It will autometically train the data and create model.
 
 ### Prediction model:
+
 '''
 $ python3 prediction.py
 '''
+
 Then you can type anything to predict whether negative or positive
+
 Ex.
 
 
 # Data Overview
-Source: (Amazon Reviews (May 1996 - Oct 2018))[https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/]
+Source: [Amazon Reviews (May 1996 - Oct 2018)](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
+
 Format: JSON
+
 Datasets for the prediction model : **Electronics_5.json**, **Home_and_Kitchen_5.json**
+
 Example data: 
+
 {
+
   "sort_timestamp": 1634275259292,
+
   "rating": 3.0,
+
   "helpful_votes": 0,
+ 
   "title": "Meh",
+ 
   "text": "These were lightweight and soft but much too small for my liking. I would have preferred two of these together to make one loc. For that reason I will not be repurchasing.",
+
   "images": [
+
     {
+
       "small_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL256_.jpg",
+ 
       "medium_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL800_.jpg",
+
       "large_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL1600_.jpg",
+
       "attachment_type": "IMAGE"
+
     }
+
   ],
+
   "asin": "B088SZDGXG",
+
   "verified_purchase": true,
+
   "parent_asin": "B08BBQ29N5",
+
   "user_id": "AEYORY2AVPMCPDV57CE337YU5LXA"
+
 }
 
 Total number of reviews : 13638545
