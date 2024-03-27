@@ -3,6 +3,9 @@
 ## Abstract
 This project aims to perform sentiment analysis on Amazon reviews ranging from May 1996 to October 2018. By analyzing customer reviews in the Electronics and Home & Kitchen categories, the project predicts whether a review is positive or negative.
 
+Ex.
+
+
 ## How to use
 * Running system example:
   * WSL2 / Ubuntu 22.04
@@ -50,8 +53,6 @@ To predict whether a given input text is negative or positive, run the predictio
 }
 
 Input any text when prompted to receive a sentiment prediction.
-
-Ex.
 
 
 # Data Overview
