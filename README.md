@@ -55,13 +55,13 @@ Ex.
 
 
 # Data Overview
-Source: [Amazon Reviews (May 1996 - Oct 2018)](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
+Source: **[Amazon Reviews (May 1996 - Oct 2018)](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)**
 
-Format: JSON
+Format: **JSON**
 
 Datasets for the prediction model : **Electronics_5.json**, **Home_and_Kitchen_5.json**
 
-Example data: 
+**Example data:**
 
 {
 
@@ -92,7 +92,7 @@ Example data:
 
 }
 
-Total number of reviews : 13,638,545
+**Total number of reviews : 13,638,545**
 
 # TFRecord_convert.py
 Preprocessing steps include converting JSON files to dataframes, sampling, and transforming into TFRecord format for efficient training.
