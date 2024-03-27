@@ -11,8 +11,8 @@ This project aims to perform sentiment analysis on Amazon reviews ranging from M
   * CUDA : 11.8
   * cuDNN : 8.7
   * Hardware:
-   * GPU : RTX 4060TI 6GB
-   * Memory : 32 GB
+    * GPU : RTX 4060TI 6GB
+    * Memory : 32 GB
 
 ### Dataset download
 First, update your local repository to get the latest version. Run this command in the terminal:
