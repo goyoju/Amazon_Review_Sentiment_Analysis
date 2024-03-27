@@ -4,8 +4,10 @@
 This project aims to perform sentiment analysis on Amazon reviews ranging from May 1996 to October 2018. By analyzing customer reviews in the Electronics and Home & Kitchen categories, the project predicts whether a review is positive or negative.
 
 Ex.
+
 **Input** : “Do not buy this”
 - **Outputs** : "92.21% probability of being a negative review.” 
+
 **Input** : “I love this!”
 - **Output** : “95.25% probability of being a positive review.”
 
