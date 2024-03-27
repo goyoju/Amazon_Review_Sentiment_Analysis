@@ -77,21 +77,12 @@ Example data:
  
   "text": "These were lightweight and soft but much too small for my liking. I would have preferred two of these together to make one loc. For that reason I will not be repurchasing.",
 
-  "images": [
-
-    {
-
-      "small_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL256_.jpg",
- 
-      "medium_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL800_.jpg",
-
-      "large_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL1600_.jpg",
-
-      "attachment_type": "IMAGE"
-
-    }
-
-  ],
+  "images": [{
+       "small_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL256_.jpg",
+       "medium_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL800_.jpg",
+       "large_image_url": "https://m.media-amazon.com/images/I/81FN4c0VHzL._SL1600_.jpg",
+       "attachment_type": "IMAGE"
+  }],
 
   "asin": "B088SZDGXG",
 
@@ -118,7 +109,7 @@ The raw data, formatted in JSON, is loaded and converted into a more memory-effi
 
 ## Positivity
 * Creating a positivity column where ratings over 3 are labeled as 1 (positive), otherwise 0 (negative)
-* ㅇropping the overall column.
+* Dropping the overall column.
 
 ## TFRecord
 * The data is then transformed into TFRecord format, requiring serialization methods.
