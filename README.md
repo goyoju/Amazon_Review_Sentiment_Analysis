@@ -1,24 +1,47 @@
 ﻿# Amazon_Review_Sentiment_Analysis
 
+
 ## Abstract
-- A sentiment analysis model to classify Amazon product reviews as positive or negative.
-- 
+This project aims to perform sentiment analysis on Amazon reviews ranging from May 1996 to October 2018. By analyzing customer reviews in the Electronics and Home & Kitchen categories, the project predicts whether a review is positive or negative.
 
 ## How to use
 * Running system example:
-  * WSL2 / Ubuntu : 22.04
-  * TensorFlow : 2.14.0
+  * WSL2 / Ubuntu 22.04
+  * Python 3
+  * TensorFlow 2.14.0
   * CUDA : 11.8
   * cuDNN : 8.7
+  * Hardware:
+   * GPU : RTX 4060TI 6GB
+   * Memory : 32 GB
+
+# Dataset download
+First, get the git first.download Run this on the terminal.
+'''
+$ git pull
+'''
+Then download the dataset from DVC.
+'''
+$ dvc pull
+'''
+
+### Setting Up:
+'''
+$ python3 setting_up.py
+'''
+
+It will autometically train the data and create model.
+
+### Prediction model:
+'''
+$ python3 prediction.py
+'''
+Then you can type anything to predict whether negative or positive
+Ex.
 
 
-https://amazon-reviews-2023.github.io/
-Used wsl2 to run tensorflow.
-https://hsleeword.wordpress.com/category/tech/%EC%86%8C%EC%86%8C%ED%95%9C-tip/
-
-https://dsaint31.tistory.com/328
 # Data Overview
-Source[https://amazon-reviews-2023.github.io/]: Amazon Reviews (May 1996 - Oct 2018)
+Source: (Amazon Reviews (May 1996 - Oct 2018))[https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/]
 Format: JSON
 Datasets for the prediction model : **Electronics_5.json**, **Home_and_Kitchen_5.json**
 Example data: 
@@ -45,83 +68,51 @@ Example data:
 Total number of reviews : 13638545
 
 # TFRecord_convert.py
-Since the data is written in Json format, I loaded and converted it to TFRecord(a format using memory efficently) that I can use it for training. At the same time I preprocessed the data.
+The raw data, formatted in JSON, is loaded and converted into a more memory-efficient format, TFRecord, for training purposes. The preprocessing steps include:
 
 ## Load and preprocessing
-* Convert two Json files to data frames with 'reviewText', 'overall', and 'vote' columns.
-* Apply preprocess function I created
+* Converting JSON files to data frames with columns: reviewText, overall, and vote.
+* Applying custom preprocessing functions.
 * Sampling the data
-  * Sample size = 100000 for each dataframes (Due to physical memory issue)
-  * weight value of 'vote' ( more votes, more reliability)
-  * drop 'vote' column since I do not need it anymore
-* return df
+  * Sampling data due to physical memory limitations (sample size = 100,000 for each dataframe)
+  * Assigning weight values based on vote counts for reliability
+  * Dropping the vote column.
 
 ## Positivity
-* newly created column
-* if overall rating is over 3, label as 1, otherwise 0
- * drop 'overall' column since I do not need it anymore
+* Creating a positivity column where ratings over 3 are labeled as 1 (positive), otherwise 0 (negative)
+* ㅇropping the overall column.
 
 ## TFRecord
-* Transform the dataframe to TFRecord format.
-* Requires serialization method to do so.
+* The data is then transformed into TFRecord format, requiring serialization methods.
 
-# training.py
-With preprocessed TFRecord data of 'reviewText' and 'positivity' column, I converted it data frame for the trainig. And then split those data and processed Tokenizer and Padding. After all train data and tokenizer that will be used for modeling part is ready, return it.
+# training_setting.py
+The preprocessed TFRecord data, consisting of reviewText and positivity, is loaded, converted into data frames, and prepared for training.
 
 ## Processing Data
-* Load the data and convert it the dataframe
-* Setting X_df as 'reviewText' and y_df as 'positivity' and split train and test data
-* Porcess Tokenizer and Padding toward train and test data for 'reviewText'
+* Loading data and converting it to a dataframe.
+* Setting X_df as reviewText and y_df as positivity, and splitting into train and test datasets.
+* Processing Tokenization and Padding for the reviewText data
   * Using tensorflow.keras
-  * Save the tokenizer as Json format for the prediction model.
-* Return X_train, X_test, y_train, y_test and tokenizer
+* Saving the tokenizer in JSON format for the prediction model.
+* Returning X_train, X_test, y_train, y_test, and the tokenizer.
 
 
 # modeling.py
 Using TensorFlow, I built a model that can determine whether the text is negative or positive
 
 ## TensorFlow Model
-* get X_train, X_test, y_train, y_test, tokenizer using process_data function from training.py
-* 
+* Using the TensorBoard callback to monitor the training process.
+* Unlocking the GPU memory usage, especially beneficial for systems running WSL2.
+* Obtaining X_train, X_test, y_train, y_test, and the tokenizer via the process_data function from training.py.
+* Adjusting Hyperparameters:
+ * Tuning the model with specific hyperparameters including Embedding Dimension, Neuron Units, Vocabulary Size, Batch Size, and Number of Epochs.
+* Constructing the Model:
+ * Adding a Dense layer with a sigmoid activation function suitable for binary classification.
+* Implementing EarlyStopping and ModelCheckpoint callbacks for improved training and memory efficiency.
+* Loading and saving the model data in HDF5 format for efficient storage and access.
+* Prediction:
+ * Assessing test accuracy to validate the model’s predictive capability.
 
-
-
-# Data Processing
-## Spliting test set and train set
-
-
-label 1 if over 3 otherwise 0
-
-Let's check if there are any duplicate
-
-(5 11374381 2)
-Since the total number of review was 13638545, but without any duplicate, it's 11374381. We have to remove those duplicate data.
-Total number of reviews : 11374382
-
-print(df.isnull().values.any()) 
-True
-
-Total number of reviews : 1781497
-
-Number of train sample : 1336122
-Number of test sample : 445375
-
-
-## Data Cleaning
-
-With regular expression let's find the review only with English. 
-Number of train sample after data cleaning : 1336122
-Number of test sample after data cleaning : 445375
-All English check!
-
-## Tokenization
-
-
-## Integer Encoding
-
-Now, I want to remove least repeated word from the train set. It may be helpful to remove words that are repeated less than 2 times.
-I set the threshold as 2 and counted the repeated number and compare.
-Size of vocabulary set: 749175
-Number of unnecessary words that is repeated less than 1 times: 448230
-Percentage of unnecessary words: 59.829812794073476
-Percentage of frequency of unnecessary words: 0.3787618369094778
+# sentiment_predict.py
+* Applying preprocessing to the user-provided string using the tokenizer from training.py.
+* Utilizing the trained model to predict whether the input string conveys a negative or positive sentiment.
